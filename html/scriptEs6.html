@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button type="button" onclick="listHandler()">목록보기</button>
+    <div>
+        <ol id="list"></ol>
+    </div>
+    <script>
+        // Enhanced Object Literal(향상된 객체 리터럴)
+        // 축약문법 - 속성과 값이 같으면 1개만 기입
+        // 축약문법 - 속성에 함수를 정의할 때 function 예약어 생략 가능
+
+        let language = "JavaScript";
+        let userInfo = {
+            // language: language,  ; 이건 방법 1
+            language, // 방법 2
+            
+            coding() { // 방법 1
+                console.log('Hello World');
+            }
+            /* 
+            coding : function() {  // 방법 2
+                 console.log('Hello World');
+            } 
+            */
+        }
+        console.log("[debug] >>> userInfo: ", userInfo.language);
+        userInfo.coding(); // Hello World
+
+        // Spread Operator(전개 연산자)
+        // 배열이나 객체를 펼쳐서 새로운 배열이나 객체를 만드는 방법
+        // 특정 객체 또는 배열의 값을 다른 객체, 다른 배열로 복제하거나 옮길 때 사용
+        // 연산자 ... 으로 사용
+
+        let obj = {
+            name : 'jwyoo',
+            camp : 'am inspire camp 3th'};
+        let newObj = {...obj}; // copy본으로 객체 생성, obj와 newObj가 각각 참조
+        // let newObj = obj ; // 문제 생김 -> obj와 같은 객체를 참조하게 됨
+        console.log("[debug] >>>  ", (newObj===obj) ? true : false); // false
+
+        let ary = [1,2,3,4,5]; // 배열
+        let newAry = [...ary]; // copy본으로 배열 생성, ary와 newAry가 각각 참조
+        console.log("[debug] >>>  ", (newAry===ary) ? true : false); // false
+
+        // Destructuring (구조 분해)
+
+        let { name, camp } = obj; // 객체 구조 분해
+
+        console.log("[debug] >>>  obj name", name); 
+        console.log("[debug] >>>  obj camp", camp);
+
+        // Promise(resolve, reject) : resolve(성공시), reject(실패시) 콜백 함수
+        // 비동기 작업을 처리하기 위한 객체
+        // 실제 통신을 위해서는 함수 or 라이브러리 필요 : fetch(), axios, jQuery( ajax() ) 등
+        // 이 들은 promise를 반환하는 함수들
+        
+        /*
+        const promise = new Promise((resolve, reject) => {
+            setTimeout( () => {  // setTimeout은 비동기 함수
+                // resolve({name: 'jiwoo', camp : 'am inspire camp 3th'}); // 성공시 resolve 호출, 객체 전달되는 중
+                reject('Error occurred'); // 실패시 reject 호출, 에러 메시지 전달되는 중
+            }, 1000);
+        })
+        console.log("[debug] >>> promise: ", promise); // 이게 먼저 실행되어 undefined로 나옴 but 1초후는 success로 나옴
+        /*
+        promise.then( response => {
+            console.log("[debug] >>> response: ", response); // 1초후에 success로 나옴
+        })
+        */
+       /*
+       promise.catch( error => {
+            console.log("[debug] >>> response ", error); // 실패시 호출
+        });
+        */
+
+        function getData() {
+            return new Promise((resolve, reject) => {
+                setTimeout( () => {
+                    const status = 500;
+                    if (status === 200) {
+                        resolve({name: 'jiwoo', camp : 'am inspire camp 3th'}); // 성공시 resolve 호출, 객체 전달되는 중
+                    } else {
+                        reject('Error occurred'); // 실패시 reject 호출, 에러 메시지 전달되는 중
+                    }
+                }, 1000);
+            });
+        } 
+
+        const listHandler = async () => {
+            /*
+            try {
+                const response = await getData(); 
+                console.log("[debug] >>> response ok : ", response); 
+            } catch (error) {
+                console.error("[debug] >>> response error ", error);
+            }
+            */
+            
+            /*
+            const response = await getData(); // 비동기 함수, 아직 getData를 하는 중인데 위 버튼에서는 렌더링을 함 
+                                              // -> 그래서 비동기 통신을 기다려주는 기능 필요 ex. await, async
+            console.log("[debug] >>> response: ", response); // 1초후에 success로 나옴
+            */
+           
+            /*
+            const response = fetch('./data/todos.json')
+            .then(response => {
+                // console.log("[debug] >>> response: ", response);
+                const data = response.json();
+                console.log("[debug] >>> data: ", data);
+            })
+            .catch(error => {
+                console.log("[debug] >>> response: ", error);
+            });
+            */
+
+            try {
+                const response = await fetch('./data/todos.json'); // 비동기 함수, 아직 getData를 하는 중인데 위 버튼에서는 렌더링을 함 
+                const data = await response.json(); // JSON 데이터를 파싱
+                /*
+                let listNode = document.querySelector("#list");
+                console.log("[debug] >>> data: ", data);
+                data.forEach(item => {
+                    let li = document.createElement("li");
+                    li.textContent = `${item.name} - ${item.camp}`;
+                    listNode.appendChild(li);
+                });
+                */
+                console.log("[debug] >>> data: ", data);
+                
+                let txt = '';
+                data.forEach(d => {
+                    txt += `<li>${d.name} - ${d.camp}</li>`;
+                });
+                document.querySelector("#list").innerHTML = txt; // innerHTML이 tag 파싱 해줌
+                
+
+            } catch (error) {
+                console.error("[debug] >>> response error ", error);
+            }
+
+        }
+        
+
+    </script>
+</body>
+</html>

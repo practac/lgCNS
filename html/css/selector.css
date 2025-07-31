@@ -1,0 +1,77 @@
+#signUp {
+    border: 1px solid red;
+    background-color: rgb(247, 252, 225);
+    width: 450px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+#signUp > fieldset {
+    border: 1px solid orange;
+    margin-bottom: 30px;
+}
+/* 직계 '>' 라는 뜻 */
+
+#signUp legend {
+    font-size: 16px;
+    font-weight: bold;
+}
+/* 후손 ' ' 라는 뜻 */
+
+#signUp li{
+    list-style: none;
+    margin-bottom: 5px;
+}
+
+#signUp label{
+    float: left;
+    width: 150px;
+    font-size: 15px;
+}
+/* 왼쪽 정렬 방법 float, width 둘다 지정해야 함 */
+
+#signUp input[type="text"],
+        input[type="password"],
+        input[type^="t"],
+        input[type$="1"] {
+        border-radius: 10px;
+        padding: 5px;
+
+}
+/* ^뜻 ^="t" 이면 t로 시작하는 
+   $뜻 끝나는 문자 */
+
+#signUp select[name="level"] {
+    width: 180px;
+    border-radius: 10px;
+    padding: 5px;
+    font-weight: bold;
+}
+
+/* 가상의 선택자 */
+#signUp fieldset:last-of-type {
+    border: none;
+}
+
+#signUp > fieldset > button {
+    border-radius: 20px;
+    font-size: 20px;
+    display: block; /* display 풀어주기 먼저 */
+    margin: auto;
+}
+
+#signUp button:hover {
+    background-color: aquamarine;
+    color: white; /*버튼 폰트컬러*/
+}
+
+
+
+
+
+/* ul {
+    list-style: none;
+    float: left;
+    width: 100px;
+
+} */

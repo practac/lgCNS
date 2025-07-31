@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label>현재시간 : </label>
+    <span id="time"></span>
+
+    <hr/>
+
+    <a href="google.com">google</a><br/>
+    <a href="naver.com">naver</a><br/>
+    <a href="lgcns.com">lgcns</a><br/>
+
+    <hr/>
+
+    <p class="result"></p>
+
+    <script>
+        let spanNode = document.querySelector("#time");
+        // let spanNode = document.getElementById('time'); -> 내가 접근하고자 한 element의 id라는 속성으로 time 접근
+        // 얘도 노드 접근, 지정한 tag 형식으로 반환
+        // document에 접근하는 방법은 다양하다
+
+        console.log("[debug] >>> ", spanNode); // 용어정리: 노드, ... 
+        
+        // new 연산자를 이용한 객체 생성
+        current = new Date();
+        console.log("[debug] >>> current : ", current );
+
+        // span tag의 body로 텍스트를 삽입하고자 할 때는 textContent 속성을 사용
+        spanNode.textContent = current.toLocaleString();
+
+        // 식별값(id) 없을 땐 tag 명으로 접근 가능 : getElementsByTagName();
+        const lst = document.getElementsByTagName('a');
+        // const lst = document.querySelector("body > a"); -> 다른 방식의 접근법
+        console.log("[debug] >>> lst : ", typeof lst);  // 결과 : object ; 배열이란 뜻
+        console.log("[debug] >>> lst : ", lst);
+        console.log("[debug] >>> lst : ", lst.length);
+
+        for(idx=0; idx < lst.length; idx++) {
+            console.log("[debug] >>> text : " , lst[idx].text);
+            console.log("[debug] >>> property : ", lst[idx].href);
+        }
+
+        // class 이름으로 tag에 접근
+        pNode = document.getElementsByClassName('result');
+        console.log("[debug] >>> result : " , pNode);
+        pNode[0].textContent = "클래스 이름으로 태그에 접근";
+        pNode[0].style.color = "red";
+
+        /*
+        var list = document.getElementsByTagName('a')
+        for(var i=0, len=list.length; i<len; i++) {
+            console.log(list.item(i).href);
+            console.log(list[i].href);
+        }
+        */
+    </script> 
+</body>
+</html>

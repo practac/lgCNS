@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+        <style>
+        .student {
+            border: 5px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            text-align: left;
+            align-items: center;
+            width: 200px;
+            border-radius : 20px; /* 모서리 둥글게 */    
+        }
+        
+        #student_list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* 가운데 정렬 */
+        }
+        h1 {
+            text-align: center;
+        }
+
+        body {
+        background-image: url('https://www.san-x.co.jp/d_present/img/wall/112_1920_1080.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        }
+
+        p {
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>졸업 학생 명단</h1>
+    <div id="student_list"></div>
+        <script>
+        async function fetchStudent() {
+            try {
+                const response = await axios.get('https://jsonplaceholder.typicode.com/users');
+                console.log("[debug] response ok ", response.data);
+                const studentList = document.querySelector("#student_list");
+                const ary = response.data;
+                ary.forEach(studentData => {
+                    const div = document.createElement("div");
+                    div.className = 'student';
+                    div.innerHTML = `
+                        <h3>${studentData.name}</h3>
+                        <p><b>닉네임:</b> ${studentData.username}</p>
+                        <p><b>이메일:</b> ${studentData.email}</p>
+                        <p>
+                            <b>주소:</b><br>
+                            ${studentData.address.street}, ${studentData.address.suite}<br>
+                            ${studentData.address.city}, ${studentData.address.zipcode}<br>
+                            위도: ${studentData.address.geo.lat}, 경도: ${studentData.address.geo.lng}
+                        </p>
+                        <p><b>전화번호</b>: ${studentData.phone}</p>
+                        <p><b>웹사이트:</b> ${studentData.website}</p>
+                        <p>
+                            <b>회사:</b><br>
+                            ${studentData.company.name}<br>
+                            ${studentData.company.catchPhrase}<br>
+                            ${studentData.company.bs}
+                        </p>
+                    `;
+                    studentList.appendChild(div);
+                });
+            } catch (error) {
+                console.error("[debug] error: ", error);
+                document.querySelector("#student_list").innerHTML = "<p>데이터를 불러올 수 없습니다.</p>";
+            }
+        }
+        fetchStudent();
+    </script>
+</body>
+</html>

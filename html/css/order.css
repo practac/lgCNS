@@ -1,0 +1,38 @@
+.accent {
+    color:rgb(220, 63, 35);
+}
+
+/* 
+px : 화면의 실제 픽셀 수를 기준으로(16px이 기본) 
+but 유연한 반응이 불가능하고 정해진 규격이기 때문에 반응형으로 만들 수 없음.
+-> em : 상대적인 단위 // 를 쓰게 된다.
+*/
+
+.txt-small {
+    font-size: 0.7em; /* 기본 값 16px 의 1.5 배 */
+}
+
+h2 {
+    color:coral;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+p {
+    font-size: 1.2em;
+    line-height: 2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+h2[text="customer"] {
+    color:rgb(124, 80, 255);
+    font-size: 1.5em;
+    text-align: center;
+}
+
+h1 {
+    background-color: black;
+    color: white;
+    text-align: center;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+
+        <link href="./css/selector.css" rel="stylesheet">
+    </head>
+    <body>
+        <form id="signUp">
+            <fieldset>
+                <legend>회원가입 정보</legend>
+                <ul>
+                    <li>
+                        <label>이메일</label>
+                        <input type="text" name="email" id="email">
+                        <!-- name 속성은 기본적으로 백엔드와 소통하기 위해 데이터 전달 위한 네이밍, 변수 역할 -->
+                        <!-- 단 spa 방식은 필수는 아님 -->
+                    </li>
+                    <li>
+                        <label>비밀번호</label>
+                        <input type="password" name="password" id="password">
+                    </li>
+                    <li>
+                        <label>사용자 회원등급</label>
+                        <select name="level">
+                            <option>정회원</option>
+                            <option>준회원</option>
+                            <option>비회원</option>
+                        </select>
+                    </li>
+                </ul>
+            </fieldset>
+            <fieldset>
+                <button type="submit">Send</button>
+            </fieldset>
+        </form>
+    </body>
+</html>

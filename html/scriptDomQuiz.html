@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>에티오피아 커피</h1>
+        <img    src="./img/coffee-blue.jpg"
+                width="200"
+                height="200">
+    </div>
+        <div>
+        <button type="button" id="changeBtn">헤딩과 이미지 속성 변경</button>
+        <!-- <button type="button">헤딩과 이미지 속성 변경</button>  첫번째 방법 -->
+        <!-- <button type="button" onClick="handler('LGCNS 커피', 'coffee-pink.jpg')">헤딩과 이미지 속성 변경</button> 두번째 방법 -->
+    </div>
+
+    <script>
+        /*
+        요구사항
+        - step 1 : 버튼의 이벤트를 감지하는 함수 정의
+        - step 2 : 이벤트 발생 시 h1 태그와 img 태그에 접근
+        - step 3 : 이미지 src 속성에 접근하여 coffee-pink.jpg로 변경
+        - step 4 : h1 태그 접근하여 텍스트를 LGCNS 커피로 변경
+        - 필요에 따라 태그에 선택자를 정의할 수 있으며, 이벤트 처리 함수는 람다식으로
+        
+        특정 영역에 text 삽입 시 : innerText, textContent, innerHTML 속성 사용
+    
+        */
+
+
+
+        /*
+        내가 한 것
+        
+        // step 1: 버튼 선택
+        const btn = document.querySelector('button');
+        // step 2: h1, img 선택
+        const heading = document.querySelector('h1');
+        const img = document.querySelector('img');
+
+        // step 1: 이벤트 감지 및 람다식 처리
+        btn.addEventListener('click', () => {
+        // step 3: 이미지 src 변경
+        img.src = './img/coffee-pink.jpg';
+        //step 4: h1 텍스트 변경
+        heading.textContent = 'LGCNS 커피';
+        });
+
+        */
+
+        const handler = (heading, img) => {
+            console.log("[debug] heading: ", heading);
+            console.log("[debug] img: ", img);
+            hNode = document.querySelector('body > div > h1');
+            imgNode = document.querySelector('body > div > img');
+            console.log("[debug] h1: ", hNode);
+            console.log("[debug] img: ", imgNode);
+            hNode.innerHTML = `<b>${heading}</b>`; // tag 포함, 헤더 파싱
+            hNode.textContent = `<b>${heading}</b>`; // innerHTML과 textContent의 차이점
+            imgNode.src = `./img/${img}`;
+        };
+
+        let btn = document.querySelector('#changeBtn');
+        console.log("[debug] btn: ", btn);
+        /* case 2
+        const eventHandler = () => {
+            alert("버튼 클릭 이벤트 발생");
+        };
+        btn.addEventListener('click', eventHandler);
+        */
+
+
+        // case 3
+        btn.onclick = () => {
+            hNode = document.querySelector('body > div > h1');
+            imgNode = document.querySelector('body > div > img');
+            hNode.innerHTML = `LGCNS 커피`;ㄴ
+            imgNode.src = `./img/${'coffee-pink.jpg'}`;
+
+        }
+
+    </script>
+</body>
+</html>
